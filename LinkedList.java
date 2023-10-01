@@ -87,7 +87,7 @@ public class LinkedList<T> implements List<T> {
 		if(empty())
 			current = head = new Node<T>(val);
 		Node<T> temp;
-		if(((Contact)head.data).getName().compareTo(name)>=0){
+		if(((Contact)head.data).getName().compareTo(name) > 0){//if it dosen't work change ">" to ">="
 			
 			temp=new Node<T>(val);
 			temp.next=head;
@@ -96,7 +96,7 @@ public class LinkedList<T> implements List<T> {
 			}
 		findFirst();
 		while(!last()) {
-			if(((Contact)current.next.data).getName().compareTo(name) > 0){
+			if(((Contact)current.next.data).getName().compareTo(name) > 0){//if it dosen't work change ">" to ">="
 			temp=current.next;
 			current.next = new Node<T>(val);
 			current = current.next;
@@ -111,7 +111,7 @@ public class LinkedList<T> implements List<T> {
 		if(empty())
 			current = head = new Node<T>(val);
 		Node<T> temp;
-		if(((Event)head.data).getTitle().compareTo(title) > 0){
+		if(((Event)head.data).getTitle().compareTo(title) > 0){//if it dosen't work change ">" to ">="
 			
 			temp=new Node<T>(val);
 			temp.next=head;
@@ -120,7 +120,7 @@ public class LinkedList<T> implements List<T> {
 			}
 		current=head;
 		while(!last()) {
-			if(((Event)current.next.data).getTitle().compareTo(title)>=0){
+			if(((Event)current.next.data).getTitle().compareTo(title) > 0){//if it dosen't work change ">" to ">="
 			temp=current.next;
 			current.next = new Node<T>(val);
 			current = current.next;
