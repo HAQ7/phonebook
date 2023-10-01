@@ -48,16 +48,7 @@ public class Contact {
 		notes = c.notes;
 	}
 
-//	public boolean checkNP(String name , String phoneNumber) {
-//		if (name.equals(name) || phoneNumber.equals(phoneNumber))
-//			return false;
-//		return true;
-//	}
-//	public boolean equalsContact(Contact c) {//?
-//		if (name.equals(c.name) || phoneNumber.equals(c.phoneNumber) || email.equals(c.email)
-//				|| address.equals(c.address) || birthday.equals(c.birthday))return true;
-//		return false;
-//	}
+
 	public boolean equalsContact(String val) {//checks if there's an attribute that matches "val"
 		if (name.equals(val) || phoneNumber.equals(val) || email.equals(val)
 				|| address.equals(val) || birthday.equals(val))
