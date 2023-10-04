@@ -84,10 +84,12 @@ public class LinkedList<T> implements List<T> {
 		
 	}
 	public void insertSortedC(String name , T val) {//insert a sorted contact list
-		if(empty())
+		if(empty()) {
 			current = head = new Node<T>(val);
+			return;
+		}
 		Node<T> temp;
-		if(((Contact)head.data).getName().compareTo(name) > 0){//if it dosen't work change ">" to ">="
+		if(((Contact)head.data).getName().compareTo(name)>0){
 			
 			temp=new Node<T>(val);
 			temp.next=head;
@@ -96,40 +98,79 @@ public class LinkedList<T> implements List<T> {
 			}
 		findFirst();
 		while(!last()) {
-			if(((Contact)current.next.data).getName().compareTo(name) > 0){//if it dosen't work change ">" to ">="
-			temp=current.next;
-			current.next = new Node<T>(val);
-			current = current.next;
+			if(((Contact)current.data).getName().compareTo(name)>0){
+			temp=new Node<T>(current.data);
+			current.data =val ;
+			temp.next = current.next;
 			current.next = temp;
 			return;
 			}
 			findNext();
+		}//check the last node
+			if(((Contact)current.data).getName().compareTo(name)>0){
+				temp=new Node<T>(current.data);
+				current.data =val ;
+				temp.next = current.next;
+				current.next = temp;
+				return;
+			}
+			//insert at the end
+			else {
+				current.next=new Node<T>(val);
 		}
-		insert(val);//insert at the end
 	}
 	public void insertSortedE(String title , T val) {//insert a sorted event list
-		if(empty())
+		if(empty()) {
 			current = head = new Node<T>(val);
+			return;
+		}
 		Node<T> temp;
-		if(((Event)head.data).getTitle().compareTo(title) > 0){//if it dosen't work change ">" to ">="
+		if(((Event)head.data).getTitle().compareTo(title)>0){
+			
 			
 			temp=new Node<T>(val);
 			temp.next=head;
 			head=temp;
 			return;
 			}
-		current=head;
+		findFirst();
 		while(!last()) {
-			if(((Event)current.next.data).getTitle().compareTo(title) > 0){//if it dosen't work change ">" to ">="
-			temp=current.next;
-			current.next = new Node<T>(val);
-			current = current.next;
+			if(((Event)current.data).getTitle().compareTo(title)>0){
+				temp=new Node<T>(current.data);
+				current.data =val ;
+				temp.next = current.next;
+				current.next = temp;
+				return;
+				}
+				findNext();
+		}
+		if(((Event)current.data).getTitle().compareTo(title)>0){
+			temp=new Node<T>(current.data);
+			current.data =val ;
+			temp.next = current.next;
 			current.next = temp;
 			return;
-			}
-			findNext();
 		}
-		insert(val);//insert at the end
+		//insert at the end
+		else {
+			current.next=new Node<T>(val);
+	}
+		
+	}
+	public int printNameAndPH() {//prints name and phone number 
+		Node<T> temp =head;
+		int count=0;		
+		System.out.println("************************");
+		while(temp!=null) {
+			
+			System.out.println("Contact "+ (1+count) +" :");
+			System.out.println("Name is \""+((Contact)temp.data).getName()+"\" .");
+			System.out.println("Phone Number is \""+((Contact)temp.data).getPhoneNumber()+"\" .");
+			System.out.println("************************");
+			count++;
+			temp=temp.next;
+		}
+		return count;
 	}
 
 	
