@@ -1,3 +1,4 @@
+import java.util.Scanner;
 
 public class PhoneBook {
 
@@ -5,32 +6,30 @@ public class PhoneBook {
 	LinkedList<Contact> listC = new LinkedList<Contact>();
 
 	public void addContact(String name, String phoneNumber, String email, String address, String birthday,
-			String notes) {
-		if (listC.isUnique(name, phoneNumber)) {
+			String notes) 
+	{		
 			Contact temp = new Contact(name, phoneNumber, email, address, birthday, notes);
 			listC.insertSortedC(name, temp);
 			System.out.println("\nThe contact was added successfully.\n");
-		} else {
-			System.out.println("\nSorry, there's an existed contact that has ethier Name or Phone number\n");
-		}
+		
 	}
 
 	public void printContact(String val) {// print all contact that have the same value
-		int count=0;
+		int count = 0;
 		listC.findFirst();
 		while (!listC.last()) {
 			if (listC.retrieve().equalsContact(val))
 				System.out.println(++count + ". ");
-				listC.retrieve().printContact();
+			listC.retrieve().printContact();
 			listC.findNext();
 		}
 		if (listC.retrieve().equalsContact(val))
 			listC.retrieve().printContact();
-		if(count<1)
+		if (count < 1)
 			System.out.println("No contact was found.");
 	}
 
-	public void printSharedEventE(String eventName) {//print all events that share "eventName" 
+	public void printSharedEventE(String eventName) {// print all events that share "eventName"
 		listE.findFirst();
 		int count = 0;
 		System.out.println("\nThe event \"" + eventName + "\" is shared with:");
@@ -48,7 +47,8 @@ public class PhoneBook {
 		if (count == 0)
 			System.out.println("\nSorry, no one have the Event name : \"" + eventName + "\".\n");
 	}
-	public void printSharedEventC(String contactName) {//print all events that share "contactName"
+
+	public void printSharedEventC(String contactName) {// print all events that share "contactName"
 		listE.findFirst();
 		int count = 0;
 		System.out.println("\nThe contact name \"" + contactName + "\" is shared event:");
@@ -67,7 +67,7 @@ public class PhoneBook {
 			System.out.println("\nSorry, there's no event has the Contact name : \"" + contactName + "\".\n");
 	}
 
-	public void printFirstNameContact(String name) {//print all contacts that have first name matches "name" 
+	public void printFirstNameContact(String name) {// print all contacts that have first name matches "name"
 		listC.findFirst();
 		int count = 0;
 		System.out.println("\nThe contact that has \"" + name + "\" as a first name:");
@@ -91,31 +91,61 @@ public class PhoneBook {
 			System.out.println("\nThere's no contact that has \"" + name + "\" as a first name.\n");
 	}
 
-	public void deleteContact() {//delete contact and the related event (if exist)
+	public void deleteContact() {// print available contacts and allow user to choose one of them and delete chosen contact and the related event (if exist)
 		if (listC.empty()) {
 			System.out.println("\nThe list is empty!\n");
 			return;
 		}
-		String temp = listC.retrieve().getName();
-		listC.remove();
-		System.out.println("\nThe contact \""+temp+"\" was deleted successfully\n");
-		if(!listE.empty()) {
-		listE.findFirst();
-		while (!listE.last()) {
+		Scanner input = new Scanner(System.in);
+		int count = listC.printNameAndPH();
+		System.out.print("\nPlease choose the contact number:");
+		int num = input.nextInt();
+		String temp = "";
+		listC.findFirst();
+		if (num > count || num < 1) {
+			System.out.println("Sorry, you've entered an incrorect number.");
+			return;
+		}
+		else if(num==1) {
+			temp = listC.retrieve().getName();
+			listC.remove();
+			System.out.println("\nThe contact was deleted successfully\n");
+		}
+		else {
+			listC.findNext();
+			int index = 2;//because the first element =1
+			while (!listC.last()) {
+				if ((index++) == num) {
+					temp = listC.retrieve().getName();
+					listC.remove();
+					System.out.println("\nThe contact was deleted successfully\n");
+					break;
+				}
+				listC.findNext();
+			}
+			if (index == num) {
+				temp = listC.retrieve().getName();
+				listC.remove();
+				System.out.println("\nThe contact was deleted successfully\n");
+			}
+		}
+		if (!listE.empty()) {
+			listE.findFirst();
+			while (!listE.last()) {
+				if (listE.retrieve().getContactName().equals(temp))
+					listE.remove();
+				listE.findNext();
+			}
+
 			if (listE.retrieve().getContactName().equals(temp))
 				listE.remove();
-			listE.findNext();
 		}
-
-		if (listE.retrieve().getContactName().equals(temp))
-			listE.remove();
-	}
 	}
 
-	public void addEvent(String title, String date, String location, String contactName) {//add event
+	public void addEvent(String title, String date, String location, String contactName) {// add event
 		listC.findFirst();
 		while (!listC.last()) {
-			if (listC.retrieve().equalsContact(contactName) && !isConflict(date)) {//check if the contact exist 
+			if (listC.retrieve().equalsContact(contactName) && !isConflict(date)) {// check if the contact exist
 				Event temp = new Event(title, date, location, contactName);
 				listE.insertSortedE(title, temp);
 				System.out.println("\nThe event was added successfully.\n");
@@ -147,7 +177,7 @@ public class PhoneBook {
 
 	}
 
-	public void printEvents() {//print all events
+	public void printEvents() {// print all events
 		if (listE.empty()) {
 			System.out.println("\nThere's no events to print.\n");
 			return;
@@ -177,10 +207,10 @@ public class PhoneBook {
 	public void printAllContact() {// just for testing that all contact are sorted. DELETE IT AFTER TESTING!!!!
 		listC.findFirst();
 		while (!listC.last()) {
-				listC.retrieve().printContact();
+			listC.retrieve().printContact();
 			listC.findNext();
 		}
-		
-			listC.retrieve().printContact();
+
+		listC.retrieve().printContact();
 	}
 }
