@@ -16,19 +16,29 @@ public class Main {
 			switch (option) {
 			case 1: {
 				System.out.print("Enter the contact's name:");
-				String name = input.next();
+				input.nextLine();
+				String name = input.nextLine();
 				System.out.print("Enter the contact's phone number:");
 				String phone = input.next();
+				if(test.listC.isUnique(name, phone)) {
 				System.out.print("Enter the contact's email address:");
+				
 				String email = input.next();
 				System.out.print("Enter the contact's address: ");
-				String address = input.next();
+				input.nextLine();
+				String address = input.nextLine();
 				System.out.print("Enter the contact's birthday:");
+				
 				String birthDay = input.next();
 				System.out.print("Enter any notes for the contact:");
-				String notes = input.next();
+				input.nextLine();
+				String notes = input.nextLine();
 
 				test.addContact(name, phone, email, address, birthDay, notes);
+				}
+				else {
+					System.out.println("\nSorry, there's an existed contact that has ethier Name or Phone number\n");
+				}
 				break;
 			}
 			case 2: {
@@ -43,26 +53,31 @@ public class Main {
 				switch (option) {
 				case 1: {
 					System.out.print("Enter contact's name:");
-					test.listC.searchConatctToPrint(input.next());
+					input.nextLine();
+					test.listC.searchConatctToPrint(input.nextLine());
 					break;
 				}
 				case 2: {
 					System.out.print("Enter contact's Phone Number:");
+					
 					test.listC.searchConatctToPrint(input.next());
 					break;
 				}
 				case 3: {
 					System.out.print("Enter contact's Email Address:");
+					
 					test.listC.searchConatctToPrint(input.next());
 					break;
 				}
 				case 4: {
 					System.out.print("Enter contact's Address:");
-					test.listC.searchConatctToPrint(input.next());
+					input.nextLine();
+					test.listC.searchConatctToPrint(input.nextLine());
 					break;
 				}
 				case 5: {
 					System.out.print("Enter contact's Birthday:");
+					
 					test.listC.searchConatctToPrint(input.next());
 					break;
 				}
@@ -77,14 +92,20 @@ public class Main {
 				break;
 			}
 			case 4: {
+				if(test.listC.empty())
+					System.out.println("Sorry, there's no contact.");
 				System.out.print("Enter event title:");
-				String title = input.next();
+				input.nextLine();
+				String title = input.nextLine();
 				System.out.print("Enter contact name:");
-				String contactName = input.next();
+				input.nextLine();
+				String contactName = input.nextLine();
 				System.out.print("Enter event date and time (MM/DD/YYYY HH:MM):");
-				String date = input.next();
+				input.nextLine();
+				String date = input.nextLine();
 				System.out.print("Enter event location:");
-				String location = input.next();
+				input.nextLine();
+				String location = input.nextLine();
 
 				test.addEvent(title, date, location, contactName);
 				break;
@@ -102,12 +123,14 @@ public class Main {
 				switch (option) {
 				case 1: {
 					System.out.print("Enter contact's name:");
-					test.printSharedEventC(input.next());
+					input.nextLine();
+					test.printSharedEventC(input.nextLine());
 					break;
 				}
 				case 2: {
 					System.out.print("Enter the event title:");
-					test.printSharedEventE(input.next());
+					input.nextLine();
+					test.printSharedEventE(input.nextLine());
 					break;
 				}
 				default: {
@@ -122,6 +145,7 @@ public class Main {
 					break;
 				}
 				System.out.print("Enter the first name:");
+				
 				test.printFirstNameContact(input.next());
 				break;
 			}
