@@ -1,66 +1,74 @@
 
 public class Contact {
-	private String name;
-	private String phoneNumber;
-	private String email;
-	private String address;
-	private String birthday;
-	private String notes;
+    private String name;
+    private String phoneNumber;
+    private String email;
+    private String address;
+    private String birthday;
+    private String notes;
 
-	public Contact(String name, String phoneNumber, String email, String address, String birthDay, String notes) {
-		this.name = name;
-		this.phoneNumber=phoneNumber;
-		this.email = email;
-		this.address = address;
-		this.birthday = birthDay;
-		this.notes = notes;
-	}
+    public Contact(String name, String phoneNumber, String email, String address, String birthDay, String notes) {
+        this.name = name;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+        this.address = address;
+        this.birthday = birthDay;
+        this.notes = notes;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public String getPhoneNumber() {
-		return phoneNumber;
-	}
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
 
-	public String getEmail() {
-		return email;
-	}
+    public String getEmail() {
+        return email;
+    }
 
-	public String getAddress() {
-		return address;
-	}
+    public String getAddress() {
+        return address;
+    }
 
-	public String getBirthday() {
-		return birthday;
-	}
+    public String getBirthday() {
+        return birthday;
+    }
 
-	public String getNotes() {
-		return notes;
-	}
+    public String getNotes() {
+        return notes;
+    }
 
-	public Contact(Contact c) {
-		name = c.name;
-		email = c.email;
-		address = c.address;
-		birthday = c.birthday;
-		notes = c.notes;
-	}
-	public boolean equalsContact(String val) {//checks if there's an attribute that matches "val"
-		if (name.equals(val) || phoneNumber.equals(val) || email.equals(val)
-				|| address.equals(val) || birthday.equals(val))
-			return true;
-		return false;
-	}
-	public void printContact() {//print all contact attribute
-		System.out.println("\n**************");
-		System.out.println("Name:"+name);
-		System.out.println("Phone Number:"+phoneNumber);
-		System.out.println("Email Address:"+email);
-		System.out.println("Address:"+address);
-		System.out.println("Birthday:"+birthday);
-		System.out.println("Notes:"+notes);
-		System.out.println("**************\n");
-	}
+    public boolean equalsName(String name) {
+        return this.name.equals(name);
+    }
+
+    public boolean equalsPhoneNumber(String phoneNumber) {
+        return this.phoneNumber.equals(phoneNumber);
+    }
+
+    public boolean equalsEmail(String email) {
+        return this.email.equals(email);
+    }
+
+    public boolean equalsAddress(String address) {
+        return this.address.equals(address);
+    }
+
+    public boolean equalsBirthday(String birthday) {
+        return this.birthday.equals(birthday);
+    }
+
+
+    public void printContact() {//print all contact attribute
+        System.out.println("\n**************");
+        System.out.println("Name:" + name);
+        System.out.println("Phone Number:" + phoneNumber);
+        System.out.println("Email Address:" + email);
+        System.out.println("Address:" + address);
+        System.out.println("Birthday:" + birthday);
+        System.out.println("Notes:" + notes);
+        System.out.println("**************\n");
+    }
 }
