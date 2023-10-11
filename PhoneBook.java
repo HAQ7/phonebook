@@ -8,7 +8,7 @@ public class PhoneBook {
     public Scanner input = new Scanner(System.in);
 
     //check if there is an existing contact that holds name and phone number
-    public boolean isUnique(String name, String phoneNumber) {
+    public boolean isUnique(String name, String phoneNumber) { // O(n)
         if (listC.empty()) return true;
         listC.findFirst();
         while (!listC.last()) {
@@ -19,7 +19,7 @@ public class PhoneBook {
         return !listC.retrieve().getName().equals(name) && !listC.retrieve().getPhoneNumber().equals(phoneNumber);
     }
 
-    public void addContact() {
+    public void addContact() { // O(n)?
         System.out.print("Enter the contact's name:");
         String name = input.nextLine();
         System.out.print("Enter the contact's phone number:");
@@ -46,7 +46,7 @@ public class PhoneBook {
         System.out.println("\nSorry, there's an existed contact that has either Name or Phone number\n");
     }
 
-    public void searchContact() {
+    public void searchContact() { // O(?)
         if (listC.empty()) {
             System.out.println("There's no contacts.");
             return;
@@ -98,7 +98,7 @@ public class PhoneBook {
 
     }
 
-    public void printFirstNameContact() {
+    public void printFirstNameContact() { // O(n)
         if (listC.empty()) {
             System.out.println("\nSorry there's no contacts!\n");
             return;
@@ -129,7 +129,7 @@ public class PhoneBook {
     }
     //prints name and phone number
 
-    public int printNameAndPH() {
+    public int printNameAndPH() { // O(n)
         listC.findFirst();
         int count = 0;
         System.out.println("************************");
@@ -150,8 +150,8 @@ public class PhoneBook {
         return count;
     }
 
-
-    public void deleteContact() {// print available contacts and allow user to choose one of them and delete chosen contact and the related event (if exist)
+    // print available contacts and allow user to choose one of them and delete chosen contact and the related event (if exist)
+    public void deleteContact() { // 
         if (listC.empty()) {
             System.out.println("\nThe list is empty!\n");
             return;
