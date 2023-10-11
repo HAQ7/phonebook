@@ -36,7 +36,7 @@ public class LinkedList<T> implements List<T> {
     }
 
     // Adding method
-    public void insert(T val) {
+    public void insert(T val) { // O(1)
         Node<T> temp;
         if (empty()) {
             current = head = new Node<T>(val);
@@ -49,7 +49,7 @@ public class LinkedList<T> implements List<T> {
     }
 
     //insert a sorted contact list
-    public void insertSortedC(String name, T val) {
+    public void insertSortedC(String name, T val) { // O(n)
         if (empty()) {
             insert(val);
             return;
@@ -74,7 +74,7 @@ public class LinkedList<T> implements List<T> {
     }
 
     //insert a sorted event list
-    public void insertSortedE(String title, T val) {
+    public void insertSortedE(String title, T val) { // O(n)
         if (empty()) {
             insert(val);
             return;
@@ -98,7 +98,7 @@ public class LinkedList<T> implements List<T> {
 
     }
 
-    public void searchContact(String val, SearchType type) {
+    public void searchContact(String val, SearchType type) { // O(n)
         boolean found = false;
         findFirst();
         do {
@@ -142,7 +142,7 @@ public class LinkedList<T> implements List<T> {
     }
     // Deleting method
 
-    public void remove() {
+    public void remove() { // O(n)
         if (current == head) {
             head = head.next;
         } else {
