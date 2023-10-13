@@ -333,24 +333,24 @@ public class PhoneBook {
             System.out.println("\nSorry, there's no event with that title : \"" + eventTitle + "\".\n");
     }
 
-    // print all events that share "eventName"
-    public void printSharedEventE(String eventName) { // O(n)
+    // print all events that share "eventTitle"
+    public void printSharedEventE(String eventTitle) { // O(n)
         listE.findFirst();
         int count = 0;
-        System.out.println("\nThe event \"" + eventName + "\" is shared with:");
+        System.out.println("\nThe event \"" + eventTitle + "\" is shared with:");
         while (!listE.last()) {
-            if (listE.retrieve().getTitle().equals(eventName)) {
+            if (listE.retrieve().getTitle().equals(eventTitle)) {
                 System.out.println(++count + ". ");
                 listE.retrieve().printEvent();
             }
             listE.findNext();
         }
-        if (listE.retrieve().getTitle().equals(eventName)) {
+        if (listE.retrieve().getTitle().equals(eventTitle)) {
             System.out.println(++count + ". ");
             listE.retrieve().printEvent();
         }
         if (count == 0)
-            System.out.println("\nSorry, no one have the Event name : \"" + eventName + "\".\n");
+            System.out.println("\nSorry, no one have the Event name : \"" + eventTitle + "\".\n");
     }
 
     public void menu() {
