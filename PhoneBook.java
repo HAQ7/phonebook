@@ -12,7 +12,7 @@ public class PhoneBook {
         if (listC.empty()) return true;
         listC.findFirst();
         while (!listC.last()) {
-            if ( listC.retrieve().getName().equals(name) || listC.retrieve().getPhoneNumber().equals(phoneNumber))
+            if (listC.retrieve().getName().equals(name) || listC.retrieve().getPhoneNumber().equals(phoneNumber))
                 return false;
             listC.findNext();
         }
@@ -52,12 +52,12 @@ public class PhoneBook {
             return;
         }
         System.out.println("""
-                            Enter search criteria:\r
-                            1. Name\r
-                            2. Phone Number\r
-                            3. Email Address\r
-                            4. Address\r
-                            5. Birthday""");
+                Enter search criteria:\r
+                1. Name\r
+                2. Phone Number\r
+                3. Email Address\r
+                4. Address\r
+                5. Birthday""");
         System.out.print("Enter choice:");
         int option = input.nextInt();
         switch (option) {
@@ -127,7 +127,7 @@ public class PhoneBook {
         if (count == 0)
             System.out.println("\nThere's no contact that has \"" + name + "\" as a first name.\n");
     }
-    
+
     //prints name and phone number
     public int printNameAndPH() { // O(n)
         listC.findFirst();
@@ -136,14 +136,14 @@ public class PhoneBook {
         while (!listC.last()) {
 
             System.out.println("Contact " + (1 + count) + " :");
-            System.out.println("Name is \"" +  listC.retrieve().getName() + "\" .");
+            System.out.println("Name is \"" + listC.retrieve().getName() + "\" .");
             System.out.println("Phone Number is \"" + listC.retrieve().getPhoneNumber() + "\" .");
             System.out.println("************************");
             count++;
             listC.findNext();
         }
         System.out.println("Contact " + (1 + count) + " :");
-        System.out.println("Name is \"" +  listC.retrieve().getName() + "\" .");
+        System.out.println("Name is \"" + listC.retrieve().getName() + "\" .");
         System.out.println("Phone Number is \"" + listC.retrieve().getPhoneNumber() + "\" .");
         System.out.println("************************");
         count++;
@@ -151,13 +151,13 @@ public class PhoneBook {
     }
 
     // print available contacts and allow user to choose one of them and delete chosen contact and the related event (if exist)
-    public void deleteContact() { // O(n*n) ? Because of method remove() inside while loop
+    public void deleteContact() { // O(n)
         if (listC.empty()) {
             System.out.println("\nThe list is empty!\n");
             return;
         }
 
-        int count = printNameAndPH(); 
+        int count = printNameAndPH();
         System.out.print("\nPlease choose the contact number:");
         int num = input.nextInt();
         input.nextLine();
@@ -168,15 +168,15 @@ public class PhoneBook {
             return;
         } else if (num == 1) {
             temp = listC.retrieve().getName();
-            listC.remove(); 
+            listC.remove();
             System.out.println("\nThe contact was deleted successfully\n");
         } else {
             listC.findNext();
             int index = 2;//because the first element =1
-            while (!listC.last()) {  
+            while (!listC.last()) {
                 if ((index++) == num) {
                     temp = listC.retrieve().getName();
-                    listC.remove();  
+                    listC.remove();
                     System.out.println("\nThe contact was deleted successfully\n");
                     break;
                 }
@@ -184,25 +184,31 @@ public class PhoneBook {
             }
             if (index == num) {
                 temp = listC.retrieve().getName();
-                listC.remove(); 
+                listC.remove();
                 System.out.println("\nThe contact was deleted successfully\n");
             }
         }
+        Boolean found = false;
+
         //to remove the event related to the contact
         if (!listE.empty()) {
             listE.findFirst();
-            // O(n*n) ? 
+            // O(n)
             while (!listE.last()) { // O(n) 
-                if (listE.retrieve().getContactName().equals(temp))
-                    listE.remove(); // O(n)
+                if (listE.retrieve().getContactName().equals(temp)) {
+                    found = true;
+                    break;
+                }
                 listE.findNext();
             }
-
             if (listE.retrieve().getContactName().equals(temp))
-                listE.remove(); 
+                found = true;
+            if (found)
+                listE.remove(); // O(n)
+
         }
     }
-    
+
     // Check if there's a date conflict
     public boolean isConflict(String date, String name, String title) {  // O(n)
         if (listE.empty())
@@ -218,7 +224,7 @@ public class PhoneBook {
 
     }
 
-    public void addEvent() { // O(n*n) Because of method isConflict() inside while loop
+    public void addEvent() { // O(n) Because of method isConflict()
         System.out.print("Enter event title:");
         String title = input.nextLine();
         System.out.print("Enter contact name:");
@@ -228,19 +234,19 @@ public class PhoneBook {
         System.out.print("Enter event location:");
         String location = input.nextLine();
         listC.findFirst();
-        while (!listC.last()) { // O(n*n)
-            if (listC.retrieve().equalsName(contactName) && !isConflict(date, contactName, title)) {// check if the contact exist
-                Event temp = new Event(title, date, location, contactName);
-                listE.insertSortedE(title, temp);
-                System.out.println("\nThe event was added successfully.\n");
-                return;
-            }
+        Boolean readyToAdd = false;
+        while (!listC.last()) {
+            if (listC.retrieve().equalsName(contactName))
+                readyToAdd = true;
             listC.findNext();
         }
-        if (listC.retrieve().equalsName(contactName) && !isConflict(date, contactName, title)) {
+        if (listC.retrieve().equalsName(contactName))
+            readyToAdd = true;
+
+        if (readyToAdd && !isConflict(date, contactName, title)) {// check if the contact exist
             Event temp = new Event(title, date, location, contactName);
-            listE.insert(temp);
-            System.out.println("\nThe event was added successfully.");
+            listE.insertSortedE(title, temp);
+            System.out.println("\nThe event was added successfully.\n");
             return;
         }
         if (isConflict(date, contactName, title))
@@ -292,6 +298,7 @@ public class PhoneBook {
         listE.retrieve().printEvent();
         System.out.println("\nAll events have printed successfully!\n");
     }
+
     // print all events that share "contactName"
     public void printSharedEventC(String contactName) { // O(n)
         listE.findFirst();
@@ -311,8 +318,10 @@ public class PhoneBook {
         if (count == 0)
             System.out.println("\nSorry, there's no event has the Contact name : \"" + contactName + "\".\n");
     }
-    // print all events that share "contactName"
-    public void printSharedContactE(String eventTitle) { // O(n*n) ? Because of method searchContact() inside while loop 
+
+    // print all contact that share "event name"
+    // this method is not on the menu
+    public void printSharedContactE(String eventTitle) { // O(n*n) Because of method searchContact() inside while loop
         listE.findFirst();
         int count = 0;
         System.out.println("\nThe event title \"" + eventTitle + "\" is shared with contacts:");
@@ -332,6 +341,7 @@ public class PhoneBook {
         if (count == 0)
             System.out.println("\nSorry, there's no event with that title : \"" + eventTitle + "\".\n");
     }
+
     // print all events that share "eventName"
     public void printSharedEventE(String eventName) { // O(n)
         listE.findFirst();
