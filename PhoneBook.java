@@ -233,17 +233,8 @@ public class PhoneBook {
         String date = input.nextLine();
         System.out.print("Enter event location:");
         String location = input.nextLine();
-        listC.findFirst();
-        Boolean readyToAdd = false;
-        while (!listC.last()) {
-            if (listC.retrieve().equalsName(contactName))
-                readyToAdd = true;
-            listC.findNext();
-        }
-        if (listC.retrieve().equalsName(contactName))
-            readyToAdd = true;
 
-        if (readyToAdd && !isConflict(date, contactName, title)) {// check if the contact exist
+        if (!isUnique(contactName, "") && !isConflict(date, contactName, title)) {// check if the contact exist
             Event temp = new Event(title, date, location, contactName);
             listE.insertSortedE(title, temp);
             System.out.println("\nThe event was added successfully.\n");

@@ -35,9 +35,6 @@ public class Event {
 		this.contactName = contactName;
 	}
 
-	public int compareTo(Event e) {
-		return title.toLowerCase().compareTo(e.title.toLowerCase());
-	}
 
 	public void printEvent() {//print all event attribute
 	System.out.println("\n**************");
