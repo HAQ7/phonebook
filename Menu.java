@@ -41,17 +41,21 @@ public class Menu {
                     break;
                 }
                 case 7: {
-                    phonebook.printEvents();
+                    phonebook.printSharedContactE();
                     break;
                 }
                 case 8: {
+                    phonebook.printEvents();
+                    break;
+                }
+                case 9: {
                     break;
                 }
                 default: {
                     System.out.println("\nSorry, make sure that you've entered a correct option.\n");
                 }
             }
-        } while (option != 8);
+        } while (option != 9);
         System.out.println("\n\nThank you !");
         phonebook.input.close();
         input.close();

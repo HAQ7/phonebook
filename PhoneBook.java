@@ -188,7 +188,7 @@ public class PhoneBook {
                 System.out.println("\nThe contact was deleted successfully\n");
             }
         }
-        Boolean found = false;
+        boolean found = false;
 
         //to remove the event related to the contact
         if (!listE.empty()) {
@@ -311,23 +311,32 @@ public class PhoneBook {
     }
 
     // print all contact that share "event name"
-    // this method is not on the menu
-    public void printSharedContactE(String eventTitle) { // O(n*n) Because of method searchContact() inside while loop
+    public void printSharedContactE() { // O(n*n) Because of method searchContact() inside while loop
+        if (listC.empty()) {
+            System.out.println("\nSorry there's no contacts!\n");
+            return;
+        }
+        if (listE.empty()) {
+            System.out.println("\nSorry there's no events!\n");
+            return;
+        }
+        System.out.print("Enter the event title:");
+        String eventTitle = input.next();
+        input.nextLine();
         listE.findFirst();
+        listC.findFirst();
         int count = 0;
         System.out.println("\nThe event title \"" + eventTitle + "\" is shared with contacts:");
         while (!listE.last()) {
             if (listE.retrieve().getTitle().equals(eventTitle)) {
                 System.out.println(++count + ". ");
                 listC.searchContact(listE.retrieve().getContactName(), SearchType.name);
-                listC.retrieve().printContact();
             }
             listE.findNext();
         }
         if (listE.retrieve().getTitle().equals(eventTitle)) {
             System.out.println(++count + ". ");
             listC.searchContact(listE.retrieve().getContactName(), SearchType.name);
-            listC.retrieve().printContact();
         }
         if (count == 0)
             System.out.println("\nSorry, there's no event with that title : \"" + eventTitle + "\".\n");
@@ -362,8 +371,9 @@ public class PhoneBook {
         System.out.println("4.Schedule an event.");
         System.out.println("5.Print event details.");
         System.out.println("6.Print contacts by first name.");
-        System.out.println("7.Print all events alphabetically.");
-        System.out.println("8.Exit\n");
+        System.out.println("7.print contacts by event title");
+        System.out.println("8.Print all events alphabetically.");
+        System.out.println("9.Exit\n");
     }
 
 }
