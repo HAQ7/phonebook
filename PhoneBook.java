@@ -152,6 +152,7 @@ public class PhoneBook {
 
     // print available contacts and allow user to choose one of them and delete chosen contact and the related event (if exist)
     public void deleteContact() { // O(n)
+        listC.findFirst();
         if (listC.empty()) {
             System.out.println("\nThe list is empty!\n");
             return;
@@ -162,32 +163,24 @@ public class PhoneBook {
         int num = input.nextInt();
         input.nextLine();
         String temp = "";
-        listC.findFirst();
         if (num > count || num < 1) {
             System.out.println("Sorry, you've entered an incorrect number.");
             return;
-        } else if (num == 1) {
+        } 
+            listC.findFirst();
+            int index = 1;
+            while (!listC.last()) {
+                if (index == num) {
+                    break;
+                }
+                index++;
+                listC.findNext();
+            }
             temp = listC.retrieve().getName();
             listC.remove();
             System.out.println("\nThe contact was deleted successfully\n");
-        } else {
-            listC.findNext();
-            int index = 2;//because the first element =1
-            while (!listC.last()) {
-                if ((index++) == num) {
-                    temp = listC.retrieve().getName();
-                    listC.remove();
-                    System.out.println("\nThe contact was deleted successfully\n");
-                    break;
-                }
-                listC.findNext();
-            }
-            if (index == num) {
-                temp = listC.retrieve().getName();
-                listC.remove();
-                System.out.println("\nThe contact was deleted successfully\n");
-            }
-        }
+            
+        
         boolean found = false;
 
         //to remove the event related to the contact
