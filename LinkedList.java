@@ -1,3 +1,12 @@
+//CLASS: LinkedList.java
+//        CSC212 Data structures - Project phase I
+//        Fall 2023
+//        EDIT DATE:
+//        10-16-2023
+//        TEAM:
+//        HHM
+//        AUTHORS:
+//        Hussam Qannam (ID443100831) , Hisham Alsuhaibani (ID443100662) , Mohammed Al Mahmud (ID443101240)
 
 public class LinkedList<T> implements List<T> {
     private Node<T> head;
@@ -47,56 +56,44 @@ public class LinkedList<T> implements List<T> {
             current.next = temp;
         }
     }
-
-    //insert a sorted contact list
-    public void insertSortedC(String name, T val) { // O(n)
+    // O(n)
+    public void insertSorted(String identifier, T val) {
         if (empty()) {
             insert(val);
             return;
         }
-
+        boolean canInsertHead = false;
+        if (val instanceof Contact) {
+            canInsertHead = ((Contact) head.data).getName().compareTo(identifier) > 0;
+        } else if (val instanceof Event) {
+            canInsertHead = ((Event) head.data).getTitle().compareTo(identifier) > 0;
+        }
         findFirst();
-        if (((Contact) head.data).getName().compareTo(name) > 0) {
-
+        if (canInsertHead) {
             Node<T> temp = new Node<T>(val);
             temp.next = head;
             head = temp;
             return;
         }
         while (!last()) {
-            if (((Contact) current.next.data).getName().compareTo(name) > 0) {
-                insert(val);
-                return;
+            if (val instanceof Contact) {
+                if (((Contact) current.next.data).getName().compareTo(identifier) > 0) {
+                    insert(val);
+                    return;
+                }
             }
-            findNext();
+            else if (val instanceof Event) {
+                if (((Event) current.next.data).getTitle().compareTo(identifier) > 0) {
+                    insert(val);
+                    return;
+                }
+            }
+                findNext();
+
         }
         insert(val);
     }
 
-    //insert a sorted event list
-    public void insertSortedE(String title, T val) { // O(n)
-        if (empty()) {
-            insert(val);
-            return;
-        }
-        findFirst();
-        if (((Event) head.data).getTitle().compareTo(title) > 0) {
-
-            Node<T> temp = new Node<T>(val);
-            temp.next = head;
-            head = temp;
-            return;
-        }
-        while (!last()) {
-            if (((Event) current.next.data).getTitle().compareTo(title) > 0) {
-                insert(val);
-                return;
-            }
-            findNext();
-        }
-        insert(val);
-
-    }
 
     public void searchContact(String val, SearchType type) { // O(n)
         boolean found = false;
@@ -120,22 +117,22 @@ public class LinkedList<T> implements List<T> {
                         ((Contact) current.data).printContact();
                         found = true;
                     }
-                        break;
+                    break;
                 case address:
-                    if (((Contact) (current.data)).equalsAddress(val)){
+                    if (((Contact) (current.data)).equalsAddress(val)) {
                         ((Contact) current.data).printContact();
                         found = true;
                     }
-                        break;
+                    break;
                 case birthday:
-                    if (((Contact) (current.data)).equalsBirthday(val)){
+                    if (((Contact) (current.data)).equalsBirthday(val)) {
                         ((Contact) current.data).printContact();
                         found = true;
                     }
-                        break;
+                    break;
             }
             findNext();
-        } while(current != null);
+        } while (current != null);
         findFirst();
         if (!found)
             System.out.println("Contact not found!");
@@ -158,7 +155,6 @@ public class LinkedList<T> implements List<T> {
             current = current.next;
         }
     }
-
 
 
 }
