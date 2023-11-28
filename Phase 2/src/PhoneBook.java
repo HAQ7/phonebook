@@ -59,7 +59,7 @@ public class PhoneBook {
 //        System.out.println("\nSorry, there's an existed contact that has either Name or Phone number\n");
 //    }
 
-	public void addContact() { // O(n) Because of method isUnique()
+	public void addContact() { 
 		System.out.print("Enter the contact's name:");
 		String name = input.nextLine();
 		System.out.print("Enter the contact's phone number:");
@@ -143,7 +143,7 @@ public class PhoneBook {
 //
 //    }
 
-	public void searchContact() { // O(n) Because of method searchContact() in class LinkedList
+	public void searchContact() { 
 		if (bstC.empty()) {
 			System.out.println("There's no contacts.");
 			return;
@@ -197,7 +197,7 @@ public class PhoneBook {
 
 	}
 
-	public void printFirstNameContact() { // O(n)
+	public void printFirstNameContact() {
 		if (bstC.empty()) {
 			System.out.println("\nSorry there's no contacts!\n");
 			return;
@@ -226,10 +226,18 @@ public class PhoneBook {
 //            System.out.println("\nThere's no contact that has \"" + name + "\" as a first name.\n");
 	}
 
+
+	// ***************************************************************
+	// no need for printNameAndPH() and old deleteContact() in phase two
+	// contact will be deleted by using findkey() method
+	// ***************************************************************
+
+
+	
 	// prints name and phone number
-	public int printNameAndPH() { // O(n)
-		System.out.println("************************");
-		return bstC.printNameAndPH();
+	// public int printNameAndPH() { 
+	// 	System.out.println("************************");
+	// 	return bstC.printNameAndPH();
 //        while (!listC.last()) {
 //
 //            System.out.println("Contact " + (1 + count) + " :");
@@ -245,7 +253,7 @@ public class PhoneBook {
 //        System.out.println("************************");
 //        count++;
 //        return count;
-	}
+	// }
 
 	// print available contacts and allow user to choose one of them and delete
 	// chosen contact and the related event (if exist)
@@ -306,7 +314,7 @@ public class PhoneBook {
 //
 //    }
 
-	// erorr
+	// erorr, it will take more time complexity
 //	public void deleteContact() { // O(n)
 //		if (bstC.empty()) {
 //			System.out.println("\nThe list is empty!\n");
@@ -363,7 +371,7 @@ public class PhoneBook {
 //
 //	}
 
-	// another sol
+	// another solution by using findkey() method
 	public void deleteContact() {
 		if (bstC.empty()) {
 			System.out.println("\nThe list is empty!\n");
@@ -451,12 +459,10 @@ public class PhoneBook {
 		String location = input.nextLine();
 
 		for (int i = 0; i < contactName.length; i++) {
-
 			if (bstC.findkey(contactName[i]) && !isConflict(date, contactName[i], title)) {// check if the contact exist
 				Event temp = new Event(title, date, location, contactName[i]);
 				listE.insertSorted(title, temp);
 				System.out.println("\nThe event was added successfully.\n");
-				return;
 			}
 			if (isConflict(date, contactName[i], title))
 				System.out.println("there is a conflict at that time");
@@ -571,7 +577,6 @@ public class PhoneBook {
 		input.nextLine();
 		listE.findFirst();
 		int count = 0;
-//		 find > ret >
 		System.out.println("\nThe event title \"" + eventTitle + "\" is shared with contacts:");
 //		bstE.printSharedContactE(bstC, eventTitle);
 		while (!listE.last()) {
