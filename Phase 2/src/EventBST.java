@@ -1,4 +1,12 @@
-//
+// 
+
+// ***************************
+
+//     no need for this class 
+
+// ***************************
+
+
 //public class EventBST<T> {
 //
 //	BSTNode<T> root, current;
