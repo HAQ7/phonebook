@@ -213,49 +213,51 @@ public class ContactBST<T> {
 		return count;
 	}
 
-	public int printNameAndPH() {
-		int count = 0;
-		return printNameAndPHH(root, count);
-	}
+	// no need for printNameAndPH() to delete contact in phase two
+	
+	// public int printNameAndPH() {
+	// 	int count = 0;
+	// 	return printNameAndPHH(root, count);
+	// }
 
-	private int printNameAndPHH(BSTNode bt, int count) {
-		if (bt == null) {
-			return count;
-		}
-		count = printNameAndPHH(bt.left, count);
-		System.out.println("Contact " + (1 + count) + " :");
-		System.out.println("Name is \"" + ((Contact) (bt.data)).getName() + "\" .");
-		System.out.println("Phone Number is \"" + ((Contact) (bt.data)).getPhoneNumber() + "\" .");
-		System.out.println("************************");
-		count++;
-		count = printNameAndPHH(bt.right, count);
-		return count;
+	// private int printNameAndPHH(BSTNode bt, int count) {
+	// 	if (bt == null) {
+	// 		return count;
+	// 	}
+	// 	count = printNameAndPHH(bt.left, count);
+	// 	System.out.println("Contact " + (1 + count) + " :");
+	// 	System.out.println("Name is \"" + ((Contact) (bt.data)).getName() + "\" .");
+	// 	System.out.println("Phone Number is \"" + ((Contact) (bt.data)).getPhoneNumber() + "\" .");
+	// 	System.out.println("************************");
+	// 	count++;
+	// 	count = printNameAndPHH(bt.right, count);
+	// 	return count;
 
-	}
+	// }
 
-	// another sol without test
-	public void deleteContact(int num) {
-		int index = 1;
-		deleteContact(num);
+	// no need for it method removeKey() will be used
+// 	public void deleteContact(int num) {
+// 		int index = 1;
+// 		deleteContact(num);
 
-	}
+// 	}
 
-	private int deleteContactH(BSTNode bt, int num, int index) {
-		if (bt == null) {
-			return index;
-		}
-		index = deleteContactH(bt.left, num, index);
-		if (index == num)
-			return index;
-		if (index == num) {
-			removeKey(bt.key);
-			return index;
-		}
-		index++;
-		index = deleteContactH(bt.right, num, index);
-		if (index == num)
-			return index;
-		return index;
-	}
+// 	private int deleteContactH(BSTNode bt, int num, int index) {
+// 		if (bt == null) {
+// 			return index;
+// 		}
+// 		index = deleteContactH(bt.left, num, index);
+// 		if (index == num)
+// 			return index;
+// 		if (index == num) {
+// 			removeKey(bt.key);
+// 			return index;
+// 		}
+// 		index++;
+// 		index = deleteContactH(bt.right, num, index);
+// 		if (index == num)
+// 			return index;
+// 		return index;
+// 	}
 
-}
+// }
