@@ -371,7 +371,7 @@ public class PhoneBook {
 //
 //	}
 
-	// another solution by using findkey() method
+	// another solution by using removeKey() method
 	public void deleteContact() {
 		if (bstC.empty()) {
 			System.out.println("\nThe list is empty!\n");
@@ -463,6 +463,7 @@ public class PhoneBook {
 				Event temp = new Event(title, date, location, contactName[i]);
 				listE.insertSorted(title, temp);
 				System.out.println("\nThe event was added successfully.\n");
+				continue;
 			}
 			if (isConflict(date, contactName[i], title))
 				System.out.println("there is a conflict at that time");
