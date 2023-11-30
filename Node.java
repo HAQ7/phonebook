@@ -1,5 +1,5 @@
-package code;
-//ENUM: SearchType.java
+
+//CLASS: Node.java
 //        CSC212 Data structures - Project phase I
 //        Fall 2023
 //        EDIT DATE:
@@ -8,11 +8,12 @@ package code;
 //        HHM
 //        AUTHORS:
 //        Hussam Qannam (ID443100831) , Hisham Alsuhaibani (ID443100662) , Mohammed Al Mahmud (ID443101240)
+public class Node<T> {
+	public Node<T> next;
+	public T data;
 
-enum SearchType {
-    name,
-    phone,
-    email,
-    address,
-    birthday
+	public Node(T data) {
+		this.data = data;
+		next = null;
+	}
 }

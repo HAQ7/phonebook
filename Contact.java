@@ -1,4 +1,4 @@
-package code;
+
 //CLASS: Contact.java
 //        CSC212 Data structures - Project phase I
 //        Fall 2023
