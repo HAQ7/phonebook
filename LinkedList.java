@@ -1,9 +1,9 @@
 
 //CLASS: LinkedList.java
-//        CSC212 Data structures - Project phase I
+//        CSC212 Data structures - Project phase II
 //        Fall 2023
 //        EDIT DATE:
-//        10-16-2023
+//        12-2-2023
 //        TEAM:
 //        HHM
 //        AUTHORS:
@@ -95,49 +95,6 @@ public class LinkedList<T> implements List<T> {
         insert(val);
     }
 
-
-    public void searchContact(String val, SearchType type) { // O(n)
-        boolean found = false;
-        findFirst();
-        do {
-            switch (type) {
-                case name:
-                    if (((Contact) (current.data)).equalsName(val)) {
-                        ((Contact) current.data).printContact();
-                        return;
-                    }
-                    break;
-                case phone:
-                    if (((Contact) (current.data)).equalsPhoneNumber(val)) {
-                        ((Contact) current.data).printContact();
-                        return;
-                    }
-                    break;
-                case email:
-                    if (((Contact) (current.data)).equalsEmail(val)) {
-                        ((Contact) current.data).printContact();
-                        found = true;
-                    }
-                    break;
-                case address:
-                    if (((Contact) (current.data)).equalsAddress(val)) {
-                        ((Contact) current.data).printContact();
-                        found = true;
-                    }
-                    break;
-                case birthday:
-                    if (((Contact) (current.data)).equalsBirthday(val)) {
-                        ((Contact) current.data).printContact();
-                        found = true;
-                    }
-                    break;
-            }
-            findNext();
-        } while (current != null);
-        findFirst();
-        if (!found)
-            System.out.println("Contact not found!");
-    }
     // Deleting method
 
     public void remove() { // O(n)

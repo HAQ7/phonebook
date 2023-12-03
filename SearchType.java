@@ -10,7 +10,6 @@
 //        Hussam Qannam (ID443100831) , Hisham Alsuhaibani (ID443100662) , Mohammed Al Mahmud (ID443101240)
 
 enum SearchType {
-    name,
     phone,
     email,
     address,

@@ -1,9 +1,9 @@
 //CLASS: Event.java
 
-//        CSC212 Data structures - Project phase I
+//        CSC212 Data structures - Project phase II
 //        Fall 2023
 //        EDIT DATE:
-//        10-16-2023
+//        12-2-2023
 //        TEAM:
 //        HHM
 //        AUTHORS:
@@ -13,21 +13,20 @@ public class Event {
 	private String title;
 	private String date;
 	private String location;
-	private String[] contacts;
 
 
+	private String contacts;
+	private final boolean appointment;
 
-	private int contactsSize;
-
-	private boolean appointment;
-
-	public Event(String title, String date, String location, String[] contactNames, boolean appointment) {
+	public Event(String title, String date, String location, String contactNames, boolean appointment) {
 		this.title = title;
 		this.date = date;
 		this.location = location;
 		this.contacts = contactNames;
-		this.contactsSize = contactNames.length;
 		this.appointment = appointment;
+	}
+	public String getContacts() {
+		return contacts;
 	}
 
 	public String getTitle() {
@@ -61,31 +60,14 @@ public class Event {
 
 	// returns true if it exists else returns false;
 	public boolean includesContact(String contact) {
-		for (int i = 0; i < contactsSize; i++) {
-
-			if (contact.equalsIgnoreCase(contacts[i]))
-				return true;
-		}
-		return false;
+		return contacts.contains(contact);
 	}
 
 	public void removeContact(String contact) {
-		int start = contactsSize;
-		for (int i = 0; i < contactsSize; i++) {
-			if (contact.equalsIgnoreCase(contacts[i])) {
-				start = i;
-				break;
-			}
-		}
-		for (int i = start + 1; i < contactsSize; i++) {
-			contacts[i - 1] = contacts[i];
-		}
-		contactsSize--;
+		contacts = contacts.replace(contact + ",","");
+		contacts = contacts.replace(contact,"");
 	}
 
-	public int getContactsSize() {
-		return contactsSize;
-	}
 
 	public void printEvent() {
 		if (appointment) {
@@ -93,7 +75,7 @@ public class Event {
 			System.out.println("Appointment's title: " + title);
 			System.out.println("Appointment's date: " + date);
 			System.out.println("Appointment's location: " + location);
-			System.out.print("Contact's name " + contacts[0]);
+			System.out.print("Contact's name: " + contacts);
 			System.out.println();
 			System.out.println("**************\n");
 			return;
@@ -102,9 +84,7 @@ public class Event {
 		System.out.println("Event's title: " + title);
 		System.out.println("Event's date: " + date);
 		System.out.println("Event's location: " + location);
-		System.out.print("Contact's name: " + contacts[0]);
-		for (int i = 1; i < contactsSize; i++)
-			System.out.print("," + contacts[i]);
+		System.out.print("Contacts: " + contacts);
 		System.out.println();
 		System.out.println("**************\n");
 	}

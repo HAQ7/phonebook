@@ -1,4 +1,13 @@
 
+//CLASS: ContactBST.java
+//        CSC212 Data structures - Project phase II
+//        Fall 2023
+//        EDIT DATE:
+//        12-2-2023
+//        TEAM:
+//        HHM
+//        AUTHORS:
+//        Hussam Qannam (ID443100831) , Hisham Alsuhaibani (ID443100662) , Mohammed Al Mahmud (ID443101240)
 
 public class ContactBST<T> {
 	BSTNode<T> root, current;
@@ -10,10 +19,6 @@ public class ContactBST<T> {
 
 	public boolean empty() {
 		return root == null;
-	}
-
-	public boolean full() {
-		return false;
 	}
 
 	public T retrieve() {
@@ -130,7 +135,8 @@ public class ContactBST<T> {
 		if (bt == null) {
 			return found;
 		}
-		if (searchContactH(bt.left, val, type, found) && type == SearchType.phone)
+		found = searchContactH(bt.left, val, type, found);
+		if ( found && type == SearchType.phone)
 			return true;
 		switch (type) {
 			case phone:
@@ -160,7 +166,8 @@ public class ContactBST<T> {
 				}
 				break;
 		}
-        return searchContactH(bt.right, val, type, found);
+		found = searchContactH(bt.right, val, type, found);
+        return found;
     }
 
 

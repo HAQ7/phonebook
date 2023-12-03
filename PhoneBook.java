@@ -1,9 +1,9 @@
 
 //CLASS: PhoneBook.java
-//        CSC212 Data structures - Project phase I
+//        CSC212 Data structures - Project phase II
 //        Fall 2023
 //        EDIT DATE:
-//        10-16-2023
+//        12-2-2023
 //        TEAM:
 //        HHM
 //        AUTHORS:
@@ -142,12 +142,16 @@ public class PhoneBook {
 			listE.findFirst();
 			while (!listE.last()) {
 				if (listE.retrieve().includesContact(name)) {
-					if (listE.retrieve().isAppointment())
+					if (listE.retrieve().isAppointment()) {
 						listE.remove();
+						continue;
+					}
 					else {
 						listE.retrieve().removeContact(name);
-						if (listE.retrieve().getContactsSize() == 0)
+						if (listE.retrieve().getContacts().isEmpty()) {
 							listE.remove();
+							continue;
+						}
 					}
 				}
 				listE.findNext();
@@ -157,7 +161,7 @@ public class PhoneBook {
 					listE.remove();
 				else {
 					listE.retrieve().removeContact(name);
-					if (listE.retrieve().getContactsSize() == 0)
+					if (listE.retrieve().getContacts().isEmpty())
 						listE.remove();
 				}
 			}
@@ -187,7 +191,8 @@ public class PhoneBook {
 		System.out.print("Enter event title:");
 		String title = input.nextLine();
 		System.out.print("Enter contacts name separated by a comma:");
-		String[] contactName = input.nextLine().split(",");
+		String contactName = input.nextLine();
+		String[] contactNameArray = contactName.split(",");
 		System.out.print("Enter event date and time  MM/DD/YYYY HH:MM :");
 		String dateAndTime = input.nextLine();
 
@@ -197,9 +202,9 @@ public class PhoneBook {
 			System.out.println("there is a conflict at that time");
 			return;
 		}
-		for (int i = 0; i < contactName.length; i++) {
-			if (!bstC.findkey(contactName[i])) {// check if the contact exist
-				System.out.println("\nThere's no contact exist with that name : \"" + contactName[i] + "\" .\n");
+		for (int i = 0; i < contactNameArray.length; i++) {
+			if (!bstC.findkey(contactNameArray[i])) {// check if the contact exist
+				System.out.println("\nThere's no contact exist with that name : \"" + contactNameArray[i] + "\" .\n");
 				return;
 			}
 		}
@@ -212,8 +217,7 @@ public class PhoneBook {
 		System.out.print("Enter appointment title:");
 		String title = input.nextLine();
 		System.out.print("Enter contact name:");
-		String[] contactName = new String[1];
-		contactName[0] = input.nextLine();
+		String contactName = input.nextLine();
 		System.out.print("Enter appointment date and time (MM/DD/YYYY HH:MM):");
 		String date = input.nextLine();
 		System.out.print("Enter appointment location:");
@@ -224,8 +228,8 @@ public class PhoneBook {
 			return;
 		}
 
-		if (!bstC.findkey(contactName[0])) {
-			System.out.println("\nThere's no contact exist with that name : \"" + contactName[0] + "\" .\n");
+		if (!bstC.findkey(contactName)) {
+			System.out.println("\nThere's no contact exist with that name : \"" + contactName + "\" .\n");
 			return;
 		}
 

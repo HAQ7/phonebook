@@ -1,9 +1,9 @@
 
 //CLASS: Menu.java
-//        CSC212 Data structures - Project phase I
+//        CSC212 Data structures - Project phase II
 //        Fall 2023
 //        EDIT DATE:
-//        10-16-2023
+//        12-2-2023
 //        TEAM:
 //        HHM
 //        AUTHORS:
@@ -69,7 +69,7 @@ public class Menu {
 					phonebook.printEvents();
 					break;
 				}
-				case 9: {
+				case 8: {
 					break;
 				}
 				default: {
@@ -82,7 +82,7 @@ public class Menu {
 				input.nextLine();
 			}
 
-		} while (option != 9);
+		} while (option != 8);
 		System.out.println("\n\nThank you !");
 		phonebook.input.close();
 		input.close();

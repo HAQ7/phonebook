@@ -1,9 +1,9 @@
 
 //CLASS: Contact.java
-//        CSC212 Data structures - Project phase I
+//        CSC212 Data structures - Project phase II
 //        Fall 2023
 //        EDIT DATE:
-//        10-16-2023
+//        12-2-2023
 //        TEAM:
 //        HHM
 //        AUTHORS:
